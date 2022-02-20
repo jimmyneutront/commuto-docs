@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'Commuto',
   tagline: 'Dinosaurs are cool',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
@@ -43,7 +43,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Commuto',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -51,9 +51,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'what-is-commuto',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -63,6 +63,13 @@ const config = {
           },
         ],
       },
+      colorMode: {
+        respectPrefersColorScheme: true,
+        switchConfig: {
+          darkIcon: "\u{263D}",
+          lightIcon: "\u{263C}",
+        },
+      },
       footer: {
         style: 'dark',
         links: [
@@ -70,8 +77,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Docs',
+                to: '/docs/what-is-commuto',
               },
             ],
           },
