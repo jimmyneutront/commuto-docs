@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  // favicon: 'img/favicon.ico',
   organizationName: 'commuto', // Usually your GitHub org/user name.
   projectName: 'commuto-docs', // Usually your repo name.
 
@@ -39,16 +39,23 @@ const config = {
     ({
       navbar: {
         title: 'Commuto',
+        /*
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
         },
+        */
         items: [
           {
             type: 'doc',
             docId: 'what-is-commuto',
             position: 'left',
             label: 'Docs',
+          },
+          {
+            href: 'https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto-whitepaper.txt',
+            label: 'Whitepaper',
+            position: 'right',
           },
           {
             href: 'https://github.com/facebook/docusaurus',
