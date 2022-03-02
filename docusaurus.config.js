@@ -8,13 +8,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Commuto',
   tagline: 'Protect what is yours',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://jimmyneutront.github.io',
+  baseUrl: '/commuto-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   // favicon: 'img/favicon.ico',
-  organizationName: 'commuto', // Usually your GitHub org/user name.
+  organizationName: 'jimmyneutront', // Usually your GitHub org/user name.
   projectName: 'commuto-docs', // Usually your repo name.
+  trailingSlash: false,
 
   presets: [
     [
@@ -58,7 +59,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/jimmyneutront',
             label: 'GitHub',
             position: 'right',
           },
