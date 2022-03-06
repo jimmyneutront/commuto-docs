@@ -96,6 +96,69 @@ This represents a swap within CommutoSwap.
 
 # Events
 
+## OfferOpened
+```solidity
+OfferOpened(bytes16 offerID, bytes interfaceId)
+```
+
+Emitted when a new offer is opened.
+
+## PriceChanged
+```solidity
+PriceChanged(bytes16 offerID)
+```
+
+Emitted when the price of an offer is changed.
+
+## OfferCanceled
+```solidity
+OfferCanceled(bytes16 offerID)
+```
+
+Emitted when an offer is canceled.
+
+## OfferTaken
+```solidity
+OfferTaken(bytes16 offerID, bytes takerInterfaceId)
+```
+
+Emitted when an offer is taken.
+
+## SwapFilled
+```solidity
+SwapFilled(bytes16 swapID);
+```
+
+Emitted when a maker-as-seller swap is filled
+
+## PaymentSent
+```solidity
+PaymentSent(bytes16 swapID)
+```
+
+Emitted when the buyer indicates that they have sent payment.
+
+## PaymentReceived
+```solidity
+PaymentReceived(bytes16 swapID)
+```
+
+Emitted when the seller indicates that they have received payment
+
+## BuyerClosed
+```solidity
+BuyerClosed(bytes16 swapID)
+```
+
+Emitted when the buyer closes their side of the swap.
+
+## SellerClosed
+```solidity
+SellerClosed(bytes16 swapID)
+```
+
+Emitted when the seller closes their side of the swap.
+
 # Read-Only Functions
 
 # State-Changing Functions
