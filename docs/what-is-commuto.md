@@ -74,3 +74,21 @@ Alice re-opens the Commuto app on her device. The app automatically discovers Bo
 Once the money arrives in Bob's bank account, he re-opens the Commuto app to confirm that he has received payment. Once he has done this, both he and Alice use the Commuto app to reclaim their security deposits. At this point, the swap is complete: Bob has the FIAT he wanted, Alice has the STBL she wanted, and they have both reclaimed their security deposits.
 
 That is how Commuto works!
+
+> #### Note:
+> The example above describes a maker-as-seller trade, but Commuto supports maker-as-buyer trades as well.
+
+### What if something goes wrong?
+
+Life happens, and sometimes a swap doesn't go smoothly for any of a number of reasons. That's why Commuto has infrastructure in place for resolving disputes between buyers and sellers.
+
+Maybe your bank is closed for the day, or you can't get to the post office to make out a money order until the weekend. In the case of small inconveniences like this, you can use the Commuto app's built-in chat feature to keep your swap counterparty updated and resolve issues without help from a dispute agent.
+
+In the event that two swappers can't work out their issues themselves, either one can raise a dispute in the Commuto app, requesting the intervention of dispute agents.
+
+Dispute agents are neutral, unbiased, bonded third parties who have been elected by the Commuto community to resolve disputes. In addition to being elected, they must surrender a community-approved amount of stablecoin to be held by the Commuto governance contract for the duration of their time as a dispute agent. If they act maliciously, this bond can be confiscated; in this way, the bonding process incentivizes good behavior.
+
+When a buyer or seller raises a dispute, three dispute agents are assigned to the case. The buyer and the seller are put into two separate chat rooms, in which they can communicate with the dispute agents and describe the circumstances of the dispute. The dispute agents are also put into a chat room of their own in order to discuss and determine a solution: they determine the amount of STBL that the buyer and seller should receive, given the circumstances of the dispute. Once two out of three dispute agents have agreed upon and submitted a solution to the CommutoSwap smart contract, the buyer and seller can claim the amounts of STBL they deserve, as determined by the dispute agents. 
+
+If the dispute agents aren't able to agree on a solution within one week, the buyer or seller can escalate the dispute further by proposing a solution for approval by the Commuto community. For more information about this process, please see the [whitepaper](https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto-whitepaper.txt).
+
