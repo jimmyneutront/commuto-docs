@@ -162,3 +162,120 @@ Emitted when the seller closes their side of the swap.
 # Read-Only Functions
 
 # State-Changing Functions
+
+## Set Settlement Method Support
+```solidity
+function setSettlementMethodSupport(bytes calldata settlementMethod, bool support)
+```
+
+Adds or removes support for a specific settlement method. This function can only be called by the owner of the CommutoSwap contract (the Commuto governance contract.)
+
+| Name             | Type  | Description                                                                               |
+|:-----------------|:------|:------------------------------------------------------------------------------------------|
+| settlementMethod | bytes | The byte array uniquely identifying the settlement method in question                     |
+| support          | bool  | Indicates whether support for the settlement method in question is to be added or removed |
+
+## Set Stablecoin Support
+```solidity
+function setStablecoinSupport(address stablecoin, bool support)
+```
+
+Adds or removes support for a specific stablecoin. This function can only be called by the owner of the CommutoSwap contract (the Commuto governance contract.)
+
+| Name       | Type    | Description                                                                        |
+|:-----------|:--------|:-----------------------------------------------------------------------------------|
+| stablecoin | address | The address of the stablecoin contract in question                                 |
+| support    | bool    | Indicates whether support for the stablecoin in question is to be added or removed |
+
+## Open Offer
+```solidity
+function openOffer(bytes16 offerID, Offer memory newOffer)
+```
+
+Opens a new offer to swap stablecoin for fiat.
+
+| Name     | Type    | Description                                               |
+|:---------|:--------|:----------------------------------------------------------|
+| offerID  | bytes16 | A type-4 UUID that uniquely identifyies the new offer     |
+| newOffer | Offer   | An Offer struct containing the specifics of the new offer |
+
+## Edit Offer
+```solidity
+function editOffer(bytes16 offerID, Offer memory editedOffer, bool editPrice, bool editSettlementMethods)
+```
+
+Edits the price and/or supported settlement methods of an open swap offer. This function can only be called by the maker of the offer in question.
+
+| Name                  | Type    | Description                                                                                                     |
+|:----------------------|:--------|:----------------------------------------------------------------------------------------------------------------|
+| offerID               | bytes16 | The id of the offer to be edited                                                                                |
+| editedOffer           | Offer   | An Offer struct with the new price and/or settlement methods of the open offer                                  |
+| editPrice             | boolean | Indicates whether the price of editedOffer should replace the price of the open offer                           |
+| editSettlementMethods | boolean | Indicates whether the settlement methods of editedOffer should replace the settlement methods of the open offer |
+
+## Cancel Offer
+```solidity
+function cancelOffer(bytes16 offerID)
+```
+
+Cancels an open offer. This function can only be called by the maker of the offer in question.
+
+| Name    | Type    | Description                        |
+|:--------|:--------|:-----------------------------------|
+| offerID | bytes16 | The id of the offer to be canceled |
+
+## Take Offer
+```solidity
+function takeOffer(bytes16 offerID, Swap memory newSwap)
+```
+
+Takes an open swap offer.
+
+| Name    | Type    | Description                                            |
+|:--------|:--------|:-------------------------------------------------------|
+| offerID | bytes16 | The id of the offer to be taken                        |
+| newSwap | Swap    | A Swap struct containing the specifics of the new swap |
+
+## Fill Swap
+```solidity
+function fillSwap(bytes16 swapID)
+```
+
+Fills a maker-as-seller swap by locking up takenSwapAmount of the maker's STBL, to be sent to the buyer upon swap closure. This function can only be called by the maker of a seller swap.
+
+| Name   | Type    | Description                     |
+|:-------|:--------|:--------------------------------|
+| swapID | bytes16 | The id of the swap to be filled |
+
+## Report Payment Sent
+```solidity
+function reportPaymentSent(bytes16 swapID)
+```
+
+Used by the buyer to indicate that they have sent payment. This function can only be called by the buyer.
+
+| Name   | Type    | Description                                        |
+|:-------|:--------|:---------------------------------------------------|
+| swapID | bytes16 | The id of the swap for which payment has been sent |
+
+## Report Payment Received
+```solidity
+function reportPaymentReceived(bytes16 swapID)
+```
+
+Used by the seller to indicate that they have received payment. This function can only be called by the buyer.
+
+| Name   | Type    | Description                                            |
+|:-------|:--------|:-------------------------------------------------------|
+| swapID | bytes16 | The id of the swap for which payment has been received |
+
+## Close Swap
+```solidity
+function closeSwap(bytes16 swapID)
+```
+
+Used by the buyer to receive the stablecoin they just purchased and have their security deposit returned to them. Used by the seller to have their security deposit returned to them. This function can only be called by the buyer and seller.
+
+| Name   | Type    | Description                     |
+|:-------|:--------|:--------------------------------|
+| swapID | bytes16 | The id of the swap to be closed |
