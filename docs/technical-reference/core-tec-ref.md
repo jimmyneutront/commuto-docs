@@ -161,6 +161,43 @@ Emitted when the seller closes their side of the swap.
 
 # Read-Only Functions
 
+## Get Supported Settlement Methods
+```solidity
+function getSupportedSettlementMethods() view public returns (bytes[] memory)
+```
+
+Returns a list of byte arrays uniquely identifying each supported settlement method.
+
+## Get Supported Stablecoins
+```solidity
+function getSupportedStablecoins() view public returns (address[] memory)
+```
+
+Returns a list containing the address of each supported stablecoin contract.
+
+## Get Offer
+```solidity
+function getOffer(bytes16 offerID) view public returns (Offer memory)
+```
+
+Returns an Offer struct with the specified id
+
+| Name    | Type    | Description                        |
+|:--------|:--------|:-----------------------------------|
+| offerID | bytes16 | The id of the Offer to be returned |
+
+## Get Swap
+```solidity
+function getSwap(bytes16 swapID) view public returns (Swap memory)
+```
+
+Returns a Swap struct with the specified id
+
+| Name   | Type    | Description                       |
+|:-------|:--------|:----------------------------------|
+| swapID | bytes16 | The id of the Swap to be returned |
+
+
 # State-Changing Functions
 
 ## Set Settlement Method Support
