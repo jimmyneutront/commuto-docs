@@ -131,3 +131,38 @@ repo should be updated to explain and document them.
 11. You are now ready to run tests on and develop the Commuto Desktop interface! 
 
 # Commuto Interface Mobile
+
+1. Ensure you have set up a working Commuto Protocol development environment.
+
+2. Ensure that you have JDK 16 installed:
+
+   ```
+   $ javac -version
+   ```
+     
+3. Install [Android Studio](https://developer.android.com/studio).
+
+4. Open Android Studio and select `File` > `New` > `Project from Version Control...`
+
+5. Clone from this repository url: [`https://github.com/jimmyneutront/Commuto_Interface_Mobile.git`](https://github.com/jimmyneutront/Commuto_Interface_Mobile.git)
+
+6. Trust the project, and wait for Android Studio to finish importing and building the project. If you don't need to work on the iOS app, you can stop here.
+
+7. If you need to work on the iOS app, you must use a Macintosh with [Xcode](https://apps.apple.com/us/app/xcode/id497799835) installed. This is due to an Apple requirement.
+
+8. If you haven't already, install [CocoaPods](https://cocoapods.org).
+
+9. Navigate to the iosApp directory and install the dependencies for the iosApp project:
+
+   ```
+   $ cd iosApp
+   $ pod install
+   ```
+   
+10. Open the iOS app in Xcode with the workspace file:
+
+   ```
+   $ open iosApp.xcworkspace
+   ```
+
+11. You are now ready to run tests on and develop the Commuto Mobile interface! 
