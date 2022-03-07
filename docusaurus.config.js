@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Commuto',
   tagline: 'Protect what is yours',
-  url: 'https://jimmyneutront.github.io',
-  baseUrl: '/commuto-docs/',
+  url: 'http://www.commuto.xyz',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   // favicon: 'img/favicon.ico',
