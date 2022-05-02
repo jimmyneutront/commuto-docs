@@ -164,28 +164,28 @@ This represents a dispute within CommutoSwap
 OfferOpened(bytes16 offerID, bytes interfaceId)
 ```
 
-Emitted when a new offer is opened.
+Emitted when a new offer is opened
 
 ## PriceChanged
 ```solidity
 PriceChanged(bytes16 offerID)
 ```
 
-Emitted when the price of an offer is changed.
+Emitted when the price of an offer is changed
 
 ## OfferCanceled
 ```solidity
 OfferCanceled(bytes16 offerID)
 ```
 
-Emitted when an offer is canceled.
+Emitted when an offer is canceled
 
 ## OfferTaken
 ```solidity
 OfferTaken(bytes16 offerID, bytes takerInterfaceId)
 ```
 
-Emitted when an offer is taken.
+Emitted when an offer is taken
 
 ## SwapFilled
 ```solidity
@@ -199,7 +199,7 @@ Emitted when a maker-as-seller swap is filled
 PaymentSent(bytes16 swapID)
 ```
 
-Emitted when the buyer indicates that they have sent payment.
+Emitted when the buyer indicates that they have sent payment
 
 ## PaymentReceived
 ```solidity
@@ -213,14 +213,78 @@ Emitted when the seller indicates that they have received payment
 BuyerClosed(bytes16 swapID)
 ```
 
-Emitted when the buyer closes their side of the swap.
+Emitted when the buyer closes their side of the swap
 
 ## SellerClosed
 ```solidity
 SellerClosed(bytes16 swapID)
 ```
 
-Emitted when the seller closes their side of the swap.
+Emitted when the seller closes their side of the swap
+
+## DisputeRaised
+```solidity
+DisputeRaised(bytes16 swapID, address disputeAgent0, address disputeAgent1, address disputeAgent2)
+```
+
+Emitted when a swapper raises a dispute
+
+## ResolutionProposed
+```solidity
+ResolutionProposed(bytes16 swapID, address disputeAgent)
+```
+
+Emitted when a dispute agent submits a resolution proposal
+
+## ReactionSubmitted
+```solidity
+ReactionSubmitted(bytes16 swapID, address addr, DisputeReaction reaction)
+```
+
+Emitted when the maker or taker of a disputed swap reacts to two or more identical resolution proposals
+
+## DisputedSwapClosed
+```solidity
+DisputedSwapClosed(bytes16 swapID, address closer)
+```
+
+Emitted when the maker or taker of a disputed swap, for which at least two identical resolution proposals have been
+submitted and accepted by both the maker and taker, closes their side of the disputed swap
+
+## DisputeEscalated
+```solidity
+DisputeEscalated(bytes16 swapID, address escalator, EscalationReason reason)
+```
+
+Emitted when the maker or taker of a disputed swap escalates the swap to be resolved by CMTO token holders
+
+## EscalatedSwapClosed
+```solidity
+EscalatedSwapClosed(bytes16 swapID, uint256 makerPayout, uint256 takerPayout, uint256 confiscationPayout)
+```
+
+Emitted when an escalated swap is closed
+
+## ServiceFeeRateChanged
+```solidity
+ServiceFeeRateChanged(uint256 newServiceFeeRate)
+```
+
+Emitted when the service fee rate is changed
+
+## MinimumDisputePeriodChanged
+```solidity
+MinimumDisputePeriodChanged(uint256 newMinimumDisputePeriod)
+```
+
+Emitted when the minimum dispute period is changed
+
+## TimelockChanged
+```solidity
+TimelockChanged(address oldTimelock, address newTimelock)
+```
+
+Emitted when the timelock address is changed
 
 # Read-Only Functions
 
