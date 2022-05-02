@@ -97,8 +97,65 @@ This represents a swap within CommutoSwap.
 | isPaymentSent         | bool             | Used internally to check whether the buyer has sent fiat payment                                                                                                   |
 | isPaymentReceived     | bool             | Used internally to check whether the seller has received fiat payment                                                                                              |
 | hasBuyerClosed        | bool             | Used internally to track whether the buyer has closed the swap and received their purchased stablecoin plus their security deposit                                 |
-| hasSellerClosed       | bool             | Used internally to track whether the seller has closed the swap and received their purchased stablecoin plus their security deposit                                |
+| hasSellerClosed       | bool             | Used internally to track whether the seller has closed the swap and received their their security deposit                                |
 | disputeRaiser         | DisputeRaiser    | Used internally to track dispute status, will be set to NONE by takeOffer                                                                                          |
+
+## Dispute
+```solidity
+struct Dispute {
+    uint disputeRaisedBlockNum;
+    address disputeAgent0;
+    address disputeAgent1;
+    address disputeAgent2;
+    bool hasDA0Proposed;
+    uint256 dA0MakerPayout;
+    uint256 dA0TakerPayout;
+    uint256 dA0ConfiscationPayout;
+    bool hasDA1Proposed;
+    uint256 dA1MakerPayout;
+    uint256 dA1TakerPayout;
+    uint256 dA1ConfiscationPayout;
+    bool hasDA2Proposed;
+    uint256 dA2MakerPayout;
+    uint256 dA2TakerPayout;
+    uint256 dA2ConfiscationPayout;
+    MatchingProposalPair matchingProposals;
+    DisputeReaction makerReaction;
+    DisputeReaction takerReaction;
+    DisputeState state;
+    bool hasMakerPaidOut;
+    bool hasTakerPaidOut;
+    uint256 totalWithoutSpentServiceFees;
+}
+```
+
+This represents a dispute within CommutoSwap
+
+| Name                         | Type                 | Description                                                                                                                                       |
+|:-----------------------------|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| disputeRaisedBlockNum        | uint                 | The block number in which the dispute was raised                                                                                                  |
+| disputeAgent0                | address              | The address of the first dispute agent selected by the dispute raiser                                                                             |
+| disputeAgent1                | address              | The address of the second dispute agent selected by the dispute raiser                                                                            |
+| disputeAgent2                | address              | The address of the third dispute agent selected by the dispute raiser                                                                             |
+| hasDA0Proposed               | bool                 | Used internally to track whether the first selected dispute agent has submitted a resolution proposal                                             |
+| dA0MakerPayout               | uint256              | The amount of STBL that the first selected dispute agent recommends the maker be paid                                                             |
+| dA0TakerPayout               | uint256              | The amount of STBL that the first selected dispute agent recommends the taker be paid                                                             |
+| dA0ConfiscationPayout        | uint256              | The amount of STBL that the first selected dispute agent recommends be confiscated and sent to the service fee pool                               |
+| hasDA1Proposed               | bool                 | Used internally to track whether the second selected dispute agent has submitted a resolution proposal                                            |
+| dA1MakerPayout               | uint256              | The amount of STBL that the second selected dispute agent recommends the maker be paid                                                            |
+| dA1TakerPayout               | uint256              | The amount of STBL that the second selected dispute agent recommends the taker be paid                                                            |
+| dA1ConfiscationPayout        | uint256              | The amount of STBL that the second selected dispute agent recommends be confiscated and sent to the service fee pool                              |
+| hasDA2Proposed               | bool                 | Used internally to track whether the third selected dispute agent has submitted a resolution proposal                                             |
+| dA2MakerPayout               | uint256              | The amount of STBL that the third selected dispute agent recommends the maker be paid                                                             |
+| dA2TakerPayout               | uint256              | The amount of STBL that the third selected dispute agent recommends the taker be paid                                                             |
+| dA2ConfiscationPayout        | uint256              | The amount of STBL that the third selected dispute agent recommends be confiscated and sent to the service fee pool                               |
+| matchingProposals            | MatchingProposalPair | Used internally to track which two submitted resolution proposals are identical to each other, if any                                             |
+| makerReaction                | DisputeReaction      | The maker's reaction to the identical resolution proposals, if any                                                                                |
+| takerReaction                | DisputeReaction      | The taker's reaction to the identical resolution proposals, if any                                                                                |
+| state                        | DisputeState         | Used internally to track the state of the dispute                                                                                                 |                                                                 |
+| hasMakerPaidOut              | bool                 | Used internally to track whether the maker has closed the disputed swap and received their STBL as specified by the approved resolution proposals |
+| hasTakerPaidOut              | bool                 | Used internally to track whether the taker has closed the disputed swap and received their STBL as specified by the approved resolution proposals |
+| totalWithoutSpentServiceFees | uint256              | The total amount of STBL that can be paid out to the maker, taker, and/or service fee pool                                                        |
 
 # Events
 
