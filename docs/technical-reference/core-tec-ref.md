@@ -18,6 +18,7 @@ struct Offer {
     uint256 amountLowerBound;
     uint256 amountUpperBound;
     uint256 securityDepositAmount;
+    uint256 serviceFeeRate;
     SwapDirection direction;
     bytes price;
     bytes[] settlementMethods;
@@ -27,20 +28,21 @@ struct Offer {
 
 This represents an offer within CommutoSwap.
 
-| Name                  | Type          | Description                                                                                         |
-|:----------------------|:--------------|:----------------------------------------------------------------------------------------------------|
-| isCreated             | bool          | Used internally to check for offer existence                                                        |
-| isTaken               | bool          | Used internally to check if offer is taken                                                          |
-| maker                 | address       | The Ethereum address of the offer maker                                                             |
-| bytes                 | interfaceId   | The maker's Commuto interface id                                                                    |
-| stablecoin            | address       | The address of the contract of the stablecoin to be swapped                                         |
-| amountLowerBound      | uint256       | The minimum amount of stablecoin the maker is willing to buy/sell                                   |
-| amountUpperBound      | uint256       | The maximum amount of stablecoin the maker is willing to buy/sell                                   |
-| securityDepositAmount | uint256       | The amount that the maker and taker must temporarily surrender as a security deposit                |
-| direction             | SwapDirection | An enum that determines whether the maker is offering to buy or sell stablecoin                     |
-| price                 | bytes         | A UTF-8 byte array describing the price of the offer, in terms of (number of FIAT units) per 1 STBL |
-| settlementMethods     | bytes[]       | An array of supported settlement methods by which the maker is willing to send/receive payment      |
-| protocolVersion       | uint256       | Indicates for which version of CommutoSwap this offer was created                                   |
+| Name                  | Type          | Description                                                                                                                                   |
+|:----------------------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| isCreated             | bool          | Used internally to check for offer existence                                                                                                  |
+| isTaken               | bool          | Used internally to check if offer is taken                                                                                                    |
+| maker                 | address       | The Ethereum address of the offer maker                                                                                                       |
+| bytes                 | interfaceId   | The maker's Commuto interface id                                                                                                              |
+| stablecoin            | address       | The address of the contract of the stablecoin to be swapped                                                                                   |
+| amountLowerBound      | uint256       | The minimum amount of stablecoin the maker is willing to buy/sell                                                                             |
+| amountUpperBound      | uint256       | The maximum amount of stablecoin the maker is willing to buy/sell                                                                             |
+| securityDepositAmount | uint256       | The amount that the maker and taker must temporarily surrender as a security deposit                                                          |
+| serviceFeeRate        | uint256       | The rate, expressed as a percentage times 100, of the taken swap amount that will be charged to both the maker and the taker as a service fee |
+| direction             | SwapDirection | An enum that determines whether the maker is offering to buy or sell stablecoin                                                               |
+| price                 | bytes         | A UTF-8 byte array describing the price of the offer, in terms of (number of FIAT units) per 1 STBL                                           |
+| settlementMethods     | bytes[]       | An array of supported settlement methods by which the maker is willing to send/receive payment                                                |
+| protocolVersion       | uint256       | Indicates for which version of CommutoSwap this offer was created                                                                             |
 
 ## Swap
 ```solidity
@@ -57,6 +59,7 @@ struct Swap {
     uint256 securityDepositAmount;
     uint256 takenSwapAmount;
     uint256 serviceFeeAmount;
+    uint256 serviceFeeRate;
     SwapDirection direction;
     bytes price;
     bytes settlementMethod;
@@ -65,6 +68,7 @@ struct Swap {
     bool isPaymentReceived;
     bool hasBuyerClosed;
     bool hasSellerClosed;
+    DisputeRaiser disputeRaiser;
 }
 ```
 
@@ -85,6 +89,7 @@ This represents a swap within CommutoSwap.
 | securityDepositAmount | uint256          | Copied from corresponding Offer struct                                                                                                                             |
 | takenSwapAmount       | uint256          | The amount of stablecoin the taker has decided to buy/sell (note that amountLowerBound ≤ takenSwapAmout ≤ amountUpperBound)                                        |
 | serviceFeeAmount      | uint256          | The amount to be paid to Commuto by both the maker and taker as a service fee                                                                                      |
+| serviceFeeRate        | uint256          | Copied from corresponding Offer struct                                                                                                                             |  
 | direction             | SwapDirection    | Copied from corresponding Offer struct                                                                                                                             |
 | price                 | bytes            | Copied from corresponding Offer struct                                                                                                                             |
 | settlementMethod      | bytes            | The settlement method by which the taker has decided to send/receive payment (note that settlementMethod must be in corresponding offer's settlementMethods field) |
@@ -93,6 +98,7 @@ This represents a swap within CommutoSwap.
 | isPaymentReceived     | bool             | Used internally to check whether the seller has received fiat payment                                                                                              |
 | hasBuyerClosed        | bool             | Used internally to track whether the buyer has closed the swap and received their purchased stablecoin plus their security deposit                                 |
 | hasSellerClosed       | bool             | Used internally to track whether the seller has closed the swap and received their purchased stablecoin plus their security deposit                                |
+| disputeRaiser         | DisputeRaiser    | Used internally to track dispute status, will be set to NONE by takeOffer                                                                                          |
 
 # Events
 
