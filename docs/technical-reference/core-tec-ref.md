@@ -288,19 +288,40 @@ Emitted when the timelock address is changed
 
 # Read-Only Functions
 
+## Get Service Fee Rate
+```solidity
+function getServiceFeeRate() view public returns (uint256)
+```
+
+Returns the current service fee rate as a percentage times 100
+
+## Get Minimum Dispute Period
+```solidity
+function getMinimumDisputePeriod() view public returns (uint256)
+```
+
+Returns the current minimum dispute period as a number of blocks
+
 ## Get Supported Settlement Methods
 ```solidity
 function getSupportedSettlementMethods() view public returns (bytes[] memory)
 ```
 
-Returns a list of byte arrays uniquely identifying each supported settlement method.
+Returns a list of byte arrays uniquely identifying each supported settlement method
 
 ## Get Supported Stablecoins
 ```solidity
 function getSupportedStablecoins() view public returns (address[] memory)
 ```
 
-Returns a list containing the address of each supported stablecoin contract.
+Returns a list containing the address of each supported stablecoin contract
+
+## Get Active Dispute Agents
+```solidity
+function getActiveDisputeAgents() view public returns (address[] memory)
+```
+
+Returns a list containing the addresses of each active dispute agent
 
 ## Get Offer
 ```solidity
@@ -324,15 +345,46 @@ Returns a Swap struct with the specified id
 |:-------|:--------|:----------------------------------|
 | swapID | bytes16 | The id of the Swap to be returned |
 
+## Get Dispute
+```solidity
+function getDispute(bytes16 swapID) view public returns (Dispute memory)
+```
+
+Returns a Dispute struct belonging to a disputed swap with the specified id
+
+| Name   | Type    | Description                                                    |
+|:-------|:--------|:---------------------------------------------------------------|
+| swapID | bytes16 | The id of the swap corresponding to the Dispute to be returned |
 
 # State-Changing Functions
+
+## Change Timelock
+```solidity
+function changeTimelock(address newTimelock) public
+```
+
+Change the timelock address. This function can only be called by the current timelock.
+
+## Set Service Fee Rate
+```solidity
+function setServiceFeeRate(uint256 newServiceFeeRate) public
+```
+
+Set the current service fee rate, as a percentage times 100. This function can only be called by the current timelock.
+
+## Set Minimum Dispute Period
+```solidity
+function setMinimumDisputePeriod(uint256 newMinimumDisputePeriod) public
+```
+
+Set the minimum dispute period, as a number of blocks. This function can only be called by the current timelock.
 
 ## Set Settlement Method Support
 ```solidity
 function setSettlementMethodSupport(bytes calldata settlementMethod, bool support)
 ```
 
-Adds or removes support for a specific settlement method. This function can only be called by the owner of the CommutoSwap contract (the Commuto governance contract.)
+Adds or removes support for a specific settlement method. This function can only be called by the current timelock.
 
 | Name             | Type  | Description                                                                               |
 |:-----------------|:------|:------------------------------------------------------------------------------------------|
@@ -344,12 +396,19 @@ Adds or removes support for a specific settlement method. This function can only
 function setStablecoinSupport(address stablecoin, bool support)
 ```
 
-Adds or removes support for a specific stablecoin. This function can only be called by the owner of the CommutoSwap contract (the Commuto governance contract.)
+Adds or removes support for a specific stablecoin. This function can only be called by the current timelock.
 
 | Name       | Type    | Description                                                                        |
 |:-----------|:--------|:-----------------------------------------------------------------------------------|
 | stablecoin | address | The address of the stablecoin contract in question                                 |
 | support    | bool    | Indicates whether support for the stablecoin in question is to be added or removed |
+
+## Set Dispute Agent Active
+```solidity
+function setDisputeAgentActive(address disputeAgentAddress, bool setActive) public
+```
+
+Controls whether or not an address belongs to an active dispute agent. This function can only be called by the current timelock.
 
 ## Open Offer
 ```solidity
@@ -427,7 +486,7 @@ Used by the buyer to indicate that they have sent payment. This function can onl
 function reportPaymentReceived(bytes16 swapID)
 ```
 
-Used by the seller to indicate that they have received payment. This function can only be called by the buyer.
+Used by the seller to indicate that they have received payment. This function can only be called by the seller.
 
 | Name   | Type    | Description                                            |
 |:-------|:--------|:-------------------------------------------------------|
@@ -443,3 +502,80 @@ Used by the buyer to receive the stablecoin they just purchased and have their s
 | Name   | Type    | Description                     |
 |:-------|:--------|:--------------------------------|
 | swapID | bytes16 | The id of the swap to be closed |
+
+## Raise Dispute
+```solidity
+function raiseDispute(bytes16 swapID, address disputeAgent0, address disputeAgent1, address disputeAgent2) public
+```
+
+Used by a swap maker or taker to raise a dispute for the swap. This function can only be called by the swap's maker or taker.
+
+| Name           | Type    | Description                                                    |
+|:---------------|:--------|:---------------------------------------------------------------|
+| swapID         | bytes16 | The id of the swap for which the dispute is being raised       |
+| disputeAgent0  | address | The address of the first dispute agent selected by the caller  |
+| disputeAgent1  | address | The address of the second dispute agent selected by the caller |
+| disputeAgent2  | address | The address of the third dispute agent selected by the caller  |
+
+## Propose Resolution
+```solidity
+function proposeResolution(bytes16 swapID, uint256 makerPayout, uint256 takerPayout, uint256 confiscationPayout) public
+```
+
+Used by a dispute agent to propose a resolution for a disputed swap. This function can only be called by a dispute agent assigned to the disputed swap.
+
+| Name               | Type    | Description                                                                                   |
+|:-------------------|:--------|:----------------------------------------------------------------------------------------------|
+| swapID             | bytes16 | The id of the disputed swap for which the resolution is being proposed                        |
+| makerPayout        | uint256 | The amount of STBL that the caller recommends the maker be paid                               |
+| takerPayout        | uint256 | The amount of STBL that the caller recommends the taker be paid                               |
+| confiscationPayout | uint256 | The amount of STBL that the caller recommends be confiscated and sent to the service fee pool |
+
+## React To Resolution Proposal
+```solidity
+function reactToResolutionProposal(bytes16 swapID, DisputeReaction reaction) public
+```
+
+Used by the maker and taker of a disputed swap to react to two or more matching resolution proposals. This function can only be called by the swap's maker or taker.
+
+| Name      | Type            | Description                                                                                                     |
+|:----------|:----------------|:----------------------------------------------------------------------------------------------------------------|
+| swapID    | bytes16         | The id of the disputed swap for which the reaction is being submitted                                           |
+| reaction  | DisputeReaction | The caller's reaction to the two or more matching resolution proposals submitted by the selected dispute agents |
+
+## Close Disputed Swap
+```solidity
+function closeDisputedSwap(bytes16 swapID) public
+```
+
+Used by the maker and taker of a disputed swap with two or more identical resolution proposals accepted by the maker and taker to claim their STBL in the amounts specified in the accepted resolution proposals. This function can only be called by the swap's maker or taker.
+
+| Name   | Type    | Description                 |
+|:-------|:--------|:----------------------------|
+| swapID | bytes16 | The id of the swap to close |
+
+## Escalate Dispute
+```solidity
+function escalateDispute(bytes16 swapID, EscalationReason reason) public
+```
+
+Used by the maker or taker of a disputed swap to escalate the dispute for resolution by CMTO token holders. This function can only be called by the swap's maker or taker.
+
+| Name    | Type             | Description                                 |
+|:--------|:-----------------|:--------------------------------------------|
+| swapID  | bytes16          | The id of the disputed swap to escalate     |
+| reason  | EscalationReason | The reason for escalating the disputed swap |
+
+## Close Escalated Swap
+```solidity
+function closeEscalatedSwap(bytes16 swapID, uint256 makerPayout, uint256 takerPayout, uint256 confiscationPayout) public
+```
+
+Used to close an escalated disputed swap. This function can only be called by the current timelock.
+
+| Name               | Type    | Description                                                                  |
+|:-------------------|:--------|:-----------------------------------------------------------------------------|
+| swapID             | bytes16 | The id of the escalated disputed swap to close                               |
+| makerPayout        | uint256 | The amount of STBL the maker will receive                                    |
+| takerPayout        | uint256 | The amount of STBL the taker will receive                                    |
+| confiscationPayout | uint256 | The amount of STBL that will be confiscated and sent to the service fee pool |
