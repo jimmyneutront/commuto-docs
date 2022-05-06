@@ -381,7 +381,7 @@ Set the minimum dispute period, as a number of blocks. This function can only be
 
 ## Set Settlement Method Support
 ```solidity
-function setSettlementMethodSupport(bytes calldata settlementMethod, bool support)
+function setSettlementMethodSupport(bytes calldata settlementMethod, bool support) public
 ```
 
 Adds or removes support for a specific settlement method. This function can only be called by the current timelock.
@@ -393,7 +393,7 @@ Adds or removes support for a specific settlement method. This function can only
 
 ## Set Stablecoin Support
 ```solidity
-function setStablecoinSupport(address stablecoin, bool support)
+function setStablecoinSupport(address stablecoin, bool support) public
 ```
 
 Adds or removes support for a specific stablecoin. This function can only be called by the current timelock.
@@ -412,7 +412,7 @@ Controls whether or not an address belongs to an active dispute agent. This func
 
 ## Open Offer
 ```solidity
-function openOffer(bytes16 offerID, Offer memory newOffer)
+function openOffer(bytes16 offerID, Offer memory newOffer) public
 ```
 
 Opens a new offer to swap stablecoin for fiat.
@@ -424,7 +424,7 @@ Opens a new offer to swap stablecoin for fiat.
 
 ## Edit Offer
 ```solidity
-function editOffer(bytes16 offerID, Offer memory editedOffer, bool editPrice, bool editSettlementMethods)
+function editOffer(bytes16 offerID, Offer memory editedOffer, bool editPrice, bool editSettlementMethods) public
 ```
 
 Edits the price and/or supported settlement methods of an open swap offer. This function can only be called by the maker of the offer in question.
@@ -438,7 +438,7 @@ Edits the price and/or supported settlement methods of an open swap offer. This 
 
 ## Cancel Offer
 ```solidity
-function cancelOffer(bytes16 offerID)
+function cancelOffer(bytes16 offerID) public
 ```
 
 Cancels an open offer. This function can only be called by the maker of the offer in question.
@@ -449,7 +449,7 @@ Cancels an open offer. This function can only be called by the maker of the offe
 
 ## Take Offer
 ```solidity
-function takeOffer(bytes16 offerID, Swap memory newSwap)
+function takeOffer(bytes16 offerID, Swap memory newSwap) public
 ```
 
 Takes an open swap offer.
@@ -461,7 +461,7 @@ Takes an open swap offer.
 
 ## Fill Swap
 ```solidity
-function fillSwap(bytes16 swapID)
+function fillSwap(bytes16 swapID) public
 ```
 
 Fills a maker-as-seller swap by locking up takenSwapAmount of the maker's STBL, to be sent to the buyer upon swap closure. This function can only be called by the maker of a seller swap.
@@ -472,7 +472,7 @@ Fills a maker-as-seller swap by locking up takenSwapAmount of the maker's STBL, 
 
 ## Report Payment Sent
 ```solidity
-function reportPaymentSent(bytes16 swapID)
+function reportPaymentSent(bytes16 swapID) public
 ```
 
 Used by the buyer to indicate that they have sent payment. This function can only be called by the buyer.
@@ -483,7 +483,7 @@ Used by the buyer to indicate that they have sent payment. This function can onl
 
 ## Report Payment Received
 ```solidity
-function reportPaymentReceived(bytes16 swapID)
+function reportPaymentReceived(bytes16 swapID) public
 ```
 
 Used by the seller to indicate that they have received payment. This function can only be called by the seller.
@@ -494,7 +494,7 @@ Used by the seller to indicate that they have received payment. This function ca
 
 ## Close Swap
 ```solidity
-function closeSwap(bytes16 swapID)
+function closeSwap(bytes16 swapID) public
 ```
 
 Used by the buyer to receive the stablecoin they just purchased and have their security deposit returned to them. Used by the seller to have their security deposit returned to them. This function can only be called by the buyer and seller.
