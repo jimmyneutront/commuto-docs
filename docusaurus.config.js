@@ -67,10 +67,6 @@ const config = {
       },
       colorMode: {
         respectPrefersColorScheme: true,
-        switchConfig: {
-          darkIcon: "\u{263D}",
-          lightIcon: "\u{263C}",
-        },
       },
       footer: {
         // style: 'dark',
