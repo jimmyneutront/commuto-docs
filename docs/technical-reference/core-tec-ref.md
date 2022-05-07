@@ -279,12 +279,19 @@ MinimumDisputePeriodChanged(uint256 newMinimumDisputePeriod)
 
 Emitted when the minimum dispute period is changed
 
-## TimelockChanged
+## PrimaryTimelockChanged
 ```solidity
-TimelockChanged(address oldTimelock, address newTimelock)
+PrimaryTimelockChanged(address oldPrimaryTimelock, address newPrimaryTimelock)
 ```
 
-Emitted when the timelock address is changed
+Emitted when the Primary Timelock address is changed
+
+## DisputeResolutionTimelockChanged
+```solidity
+DisputeResolutionTimelockChanged(address oldDisputeResolutionTimelock, address newDisputeResolutionTimelock)
+```
+
+Emitted when the Dispute Resolution Timelock address is changed
 
 # Read-Only Functions
 
@@ -358,12 +365,19 @@ Returns a Dispute struct belonging to a disputed swap with the specified id
 
 # State-Changing Functions
 
-## Change Timelock
+## Change Primary Timelock
 ```solidity
-function changeTimelock(address newTimelock) public
+function changePrimaryTimelock(address newPrimaryTimelock) public
 ```
 
-Change the timelock address. This function can only be called by the current timelock.
+Change the Primary Timelock address. This function can only be called by the current Primary Timelock.
+
+## Change Dispute Resolution Timelock
+```solidity
+function changeDisputeResolutionTimelock(address newDisputeResolutionTimelock) public
+```
+
+Change the Dispute Resolution Timelock address. This function can only be called by the current Primary Timelock.
 
 ## Set Service Fee Rate
 ```solidity
