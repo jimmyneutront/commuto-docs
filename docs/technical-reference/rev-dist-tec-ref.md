@@ -75,12 +75,21 @@ function getRevenueDistributionSnapshot(address stablecoin) view public returns 
 
 Returns the latest Revenue Distribution Snapshot for the specified stablecoin
 
+| Name       | Type    | Description                                                                                |
+|:-----------|:--------|:-------------------------------------------------------------------------------------------|
+| stablecoin | address | The contract address of the stablecoin for which to get the Revenue Distribution Snapshot  |
+
 ## Get Latest Revenue Collection (in CommutoToken)
 ```solidity
 function getLatestRevenueCollection(address stablecoin, address account) view public returns (uint256)
 ```
 
 Returns the number of the block in which the specified account last collected revenue in the specified stablecoin
+
+| Name       | Type    | Description                                                |
+|:-----------|:--------|:-----------------------------------------------------------|
+| stablecoin | address | The contract address of the stablecoin that was collected  |
+| account    | address | The account for which to get the latest revenue collection |
 
 ## Get Revenue Collection Period (in CommutoToken)
 ```solidity
@@ -98,12 +107,21 @@ function takeRevenueDistributionSnapshot(address stablecoin) public
 
 Create a new Revenue Distribution Period Snapshot for the specified stablecoin
 
+| Name       | Type    | Description                                                                                |
+|:-----------|:--------|:-------------------------------------------------------------------------------------------|
+| stablecoin | address | The contract address of the stablecoin for which to take the Revenue Distribution Snapshot |
+
 ## Collect Revenue (in CommutoToken)
 ```solidity
 function collectRevenue(address stablecoin, address recipient) public
 ```
 
 Collect revenue in the specified stablecoin, and transfer it to the specified recipient
+
+| Name       | Type    | Description                                                        |
+|:-----------|:--------|:-------------------------------------------------------------------|
+| stablecoin | address | The contract address of the stablecoin in which to collect revenue |
+| recipient  | address | The account to which the revenue should be transfered              |
 
 ## Change Timelock (in CommutoToken)
 ```solidity
@@ -112,9 +130,17 @@ function changeTimelock(address newTimelock) public
 
 Give a new Timelock control over CommutoToken. (This function can only be called by the current Timelock)
 
+| Name        | Type    | Description                              |
+|:------------|:--------|:-----------------------------------------|
+| newTimelock | address | The address of the new Timelock contract |
+
 ## Change Revenue Collection Period (in CommutoToken)
 ```solidity
 function changeRevenueCollectionPeriod(uint256 newRevenueCollectionPeriod) public
 ```
 
 Set a new Revenue Collection Period. (This function can only be called by the current Timelock)
+
+| Name                       | Type    | Description                                              |
+|:---------------------------|:--------|:---------------------------------------------------------|
+| newRevenueCollectionPeriod | uint256 | The new Revenue Collection Period, as a number of blocks |
