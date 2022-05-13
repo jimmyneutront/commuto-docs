@@ -372,12 +372,20 @@ function changePrimaryTimelock(address newPrimaryTimelock) public
 
 Change the Primary Timelock address. This function can only be called by the current Primary Timelock.
 
+| Name               | Type    | Description                                      |
+|:-------------------|:--------|:-------------------------------------------------|
+| newPrimaryTimelock | address | The address of the new Primary Timelock contract |
+
 ## Change Dispute Resolution Timelock
 ```solidity
 function changeDisputeResolutionTimelock(address newDisputeResolutionTimelock) public
 ```
 
 Change the Dispute Resolution Timelock address. This function can only be called by the current Primary Timelock.
+
+| Name                         | Type    | Description                                                 |
+|:-----------------------------|:--------|:------------------------------------------------------------|
+| newDisputeResolutionTimelock | address | The address of the new Dispute Resolution Timelock contract |
 
 ## Set Service Fee Rate
 ```solidity
@@ -386,12 +394,20 @@ function setServiceFeeRate(uint256 newServiceFeeRate) public
 
 Set the current service fee rate, as a percentage times 100. This function can only be called by the current timelock.
 
+| Name              | Type    | Description                                                   |
+|:------------------|:--------|:--------------------------------------------------------------|
+| newServiceFeeRate | uint256 | The new service fee rate, expressed as a percentage times 100 |
+
 ## Set Minimum Dispute Period
 ```solidity
 function setMinimumDisputePeriod(uint256 newMinimumDisputePeriod) public
 ```
 
 Set the minimum dispute period, as a number of blocks. This function can only be called by the current timelock.
+
+| Name                    | Type    | Description                                           |
+|:------------------------|:--------|:------------------------------------------------------|
+| newMinimumDisputePeriod | address | The new minimum dispute period, as a number of blocks |
 
 ## Set Settlement Method Support
 ```solidity
@@ -422,7 +438,11 @@ Adds or removes support for a specific stablecoin. This function can only be cal
 function setDisputeAgentActive(address disputeAgentAddress, bool setActive) public
 ```
 
-Controls whether or not an address belongs to an active dispute agent. This function can only be called by the current timelock.
+Controls whether an address belongs to an active dispute agent. This function can only be called by the current timelock.
+
+| Name                | Type    | Description                                                          |
+|:--------------------|:--------|:---------------------------------------------------------------------|
+| disputeAgentAddress | address | The address of the dispute agent for which active status will be set |
 
 ## Open Offer
 ```solidity
