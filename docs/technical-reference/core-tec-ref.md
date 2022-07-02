@@ -166,12 +166,12 @@ OfferOpened(bytes16 offerID, bytes interfaceId)
 
 Emitted when a new offer is opened
 
-## PriceChanged
+## OfferEdited
 ```solidity
-PriceChanged(bytes16 offerID)
+OfferEdited(bytes16 offerID)
 ```
 
-Emitted when the price of an offer is changed
+Emitted when the price or settlement methods of an offer are changed
 
 ## OfferCanceled
 ```solidity
