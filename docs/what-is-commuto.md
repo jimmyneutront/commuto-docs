@@ -17,16 +17,6 @@ These components all work together to create Commuto's unified user experience.
 
 Commuto is what all financial technology should be: easy to use, fully transparent, and open to anyone, at any time, in any place.
 
-## Why does Commuto exist?
-
-The right to freely exchange one's own fairly acquired property is fundamental. Unfortunately, world leaders and central bankers often trample this right with reckless abandon, invariably at the expense of the world's least fortunate.
-
-In November 2009, the government of the Democratic People's Republic of Korea announced a revaluation of the Korean People's won. One hundred old wons could be exchanged for one new won, but no more than 500,000 old won (worth about 200 US dollars at the time) could be exchanged, and old won ceased to be legal tender at the end of the month. Those who violated currency exchange laws were threatened with "merciless punishment" and two accused black market currency traders were allegedly shot dead in the street by Pyongsong police. And so with the stroke of a pen, the fortunes of an entire nation disappeared. [\[1\]](https://en.wikipedia.org/wiki/North_Korean_won)
-
-Throughout the 1990s, concerns about the stability of the peso led many Argentinians to hold their wealth in US dollar-denominated bank accounts. But in December 2001, they learned that their dollars weren't safe either. In an effort to cheapen Argentine exports and stop a bank run, the government froze all bank accounts for the next ninety days. Account holders could withdraw no more than a few hundred pesos per week from peso-denominated accounts, and couldn't withdraw from dollar-denominated accounts unless they agreed to the immediate conversion of their dollar withdrawal to pesos. [\[2\]](https://en.wikipedia.org/wiki/Corralito) The following January, things got worse. The peso dropped its peg to the US dollar; one dollar became worth four pesos. Additionally, all dollars that remained in bank accounts were converted to pesos, but at the old 1:1 exchange rate. [\[3\]](https://www.theglobeandmail.com/report-on-business/argentinas-forced-pesofication-ruled-illegal/article25685504/) And just like that, the savings of the Argentines were quartered.
-
-These are perhaps the two most egregious and well-known examples of a theme seen throughout history, in which honest, hardworking people are reduced to little more than numbers on a spreadsheet. Commuto exists to break this mold, putting the user back in control of their own wealth.
-
 ## How does Commuto work?
 
 This section will walk you through the process of exchanging ("swapping") fiat currency and stablecoins with Commuto. To keep things understandable for new users, many technical details will be glossed over. If you are interested in a more technically thorough explanation, you can consult the contract's [technical reference](https://jimmyneutront.github.io/commuto-docs/docs/technical-reference/core-tec-ref), the [whitepaper](https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto-whitepaper.txt) or the [interface specification](https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto-interface-specification.txt) along with its accompanying BPMN diagrams.

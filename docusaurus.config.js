@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Commuto',
-  tagline: 'Protect what is yours',
-  url: 'http://www.commuto.xyz',
+  tagline: '',
+  url: 'http://commuto.xyz',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -54,8 +54,8 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto-whitepaper.txt',
-            label: 'Whitepaper',
+            href: 'https://github.com/jimmyneutront/commuto-whitepaper/blob/main/commuto.pdf',
+            label: 'Paper',
             position: 'right',
           },
           {

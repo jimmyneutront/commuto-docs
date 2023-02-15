@@ -189,7 +189,7 @@ export default function Home() {
           <div>
             <h2>Source Code</h2>
             <p>
-              All Commuto code is open source and freely available.
+              All Commuto code is open source and freely licensed.
             </p>
             { github.map((action) => (
               <Link style={{ textDecoration: "none" }} href={action.href}>
